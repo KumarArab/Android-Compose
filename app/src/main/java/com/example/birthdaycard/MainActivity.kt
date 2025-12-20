@@ -1,5 +1,6 @@
 package com.example.birthdaycard
 
+import android.graphics.drawable.Icon
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -9,8 +10,17 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Call
+import androidx.compose.material.icons.filled.Email
+import androidx.compose.material.icons.filled.Share
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -19,9 +29,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.input.pointer.PointerIcon
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -40,7 +52,8 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    ComposeQuadrant()
+                      BusinessCard()
+//                    ComposeQuadrant()
 //                    TaskManager(title = "All tasks completed", subtitle = "Nice work!")
 //                    ComposeArticle(title = "Jetpack Compose tutorial", para1 ="Jetpack Compose is a modern toolkit for building native Android UI. Compose simplifies and accelerates UI development on Android with less code, powerful tools, and intuitive Kotlin APIs." , para2 ="In this tutorial, you build a simple UI component with declarative functions. You call Compose functions to say what elements you want and the Compose compiler does the rest. Compose is built around Composable functions. These functions let you define your app\\'s UI programmatically because they let you describe how it should look and provide data dependencies, rather than focus on the process of the UI\\'s construction, such as initializing an element and then attaching it to a parent. To create a Composable function, you add the @Composable annotation to the function name.")
 //                    GreetingImage("Happy Birthday Sam!","from Bae")
@@ -148,12 +161,14 @@ fun ComposeQuadrant(modifier: Modifier = Modifier){
                     modifier
                         .fillMaxSize(1F)
                         .background(Color(0xFFEADDFF))
-                        .weight(0.5F,true)
+                        .weight(0.5F, true)
                 ) {
                     Column(
                         verticalArrangement = Arrangement.Center,
                         horizontalAlignment = Alignment.CenterHorizontally,
-                        modifier = modifier.fillMaxSize(1F).padding(16.dp)
+                        modifier = modifier
+                            .fillMaxSize(1F)
+                            .padding(16.dp)
                     ) {
                         Text(
                             text = "Text composable",
@@ -171,14 +186,17 @@ fun ComposeQuadrant(modifier: Modifier = Modifier){
             Box(
                 modifier
                     .fillMaxSize(1F)
-                    .background(Color(0xFFD0BCFF)
+                    .background(
+                        Color(0xFFD0BCFF)
                     )
-                    .weight(0.5F,true)
+                    .weight(0.5F, true)
             ) {
                 Column(
                     verticalArrangement = Arrangement.Center,
                     horizontalAlignment = Alignment.CenterHorizontally,
-                    modifier = modifier.fillMaxSize(1F).padding(16.dp)
+                    modifier = modifier
+                        .fillMaxSize(1F)
+                        .padding(16.dp)
                 ) {
                     Text(
                         text = "Image composable",
@@ -200,14 +218,17 @@ fun ComposeQuadrant(modifier: Modifier = Modifier){
             Box(
                 modifier
                     .fillMaxSize(1F)
-                    .background(Color(0xFFB69DF8)
+                    .background(
+                        Color(0xFFB69DF8)
                     )
-                    .weight(0.5F,true)
+                    .weight(0.5F, true)
             ) {
                 Column(
                     verticalArrangement = Arrangement.Center,
                     horizontalAlignment = Alignment.CenterHorizontally,
-                    modifier = modifier.fillMaxSize(1F).padding(16.dp)
+                    modifier = modifier
+                        .fillMaxSize(1F)
+                        .padding(16.dp)
                 ) {
                     Text(
                         text = "Row composable",
@@ -226,12 +247,14 @@ fun ComposeQuadrant(modifier: Modifier = Modifier){
                 modifier
                     .fillMaxSize(1F)
                     .background(Color(0xFFF6EDFF))
-                    .weight(0.5F,true)
+                    .weight(0.5F, true)
             ) {
                 Column(
                     verticalArrangement = Arrangement.Center,
                     horizontalAlignment = Alignment.CenterHorizontally,
-                    modifier = modifier.fillMaxSize(1F).padding(16.dp)
+                    modifier = modifier
+                        .fillMaxSize(1F)
+                        .padding(16.dp)
                 ) {
                     Text(
                         text = "Column composable",
@@ -252,13 +275,125 @@ fun ComposeQuadrant(modifier: Modifier = Modifier){
     }
 }
 
+@Composable
+fun BusinessCard(modifier: Modifier = Modifier){
+    Surface(color = Color(0xFF1B211A)) {
+        Column(
+horizontalAlignment = Alignment.CenterHorizontally,
+            modifier = modifier
+                .fillMaxHeight(1.0F)
+                .fillMaxWidth(),) {
+            BusinessCardBody()
+            BusinessCardFooter()
+        }
+    }
+}
+
+@Composable
+fun BusinessCardBody(modifier: Modifier = Modifier){
+    val image = painterResource(id = R.drawable.android_logo)
+
+        Column(
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally,
+            modifier = modifier.fillMaxHeight(0.8F)
+        ) {
+            Image(
+                painter = image,
+                contentDescription = "Hero image",
+                contentScale = ContentScale.Fit,
+                modifier = modifier.height(200.dp)
+            )
+            Text(
+                text = "Saturo Gojo",
+                fontSize = 70.sp,
+                color = Color(0xFF628141),
+                fontWeight = FontWeight.ExtraBold,
+                fontFamily = FontFamily.Cursive,
+                modifier = modifier.padding(0.dp,0.dp,0.dp,20.dp),
+                textAlign = TextAlign.Center
+            )
+            Text(
+                text = "Android Developer Extraordinaire",
+                modifier = modifier.padding(horizontal = 16.dp),
+                color = Color(0xFFEBD5AB),
+                textAlign = TextAlign.Center
+            )
+
+        }
+
+}
+
+@Composable
+fun BusinessCardFooter(modifier: Modifier = Modifier){
+Column(
+    horizontalAlignment = Alignment.Start,
+    modifier = modifier.padding(50.dp,0.dp,0.dp,0.dp)
+
+
+){
+    Row(
+        modifier.padding(8.dp)
+    ){
+        Icon(
+            imageVector = Icons.Default.Call, // Access the default menu icon
+            contentDescription = "Menu Button", // For accessibility
+            modifier = Modifier.size(24.dp), // Adjust size
+            tint = Color(0xFFEBD5AB)
+        )
+        Text(
+            text = "+91 75491 52303",
+            modifier = modifier.padding(horizontal = 16.dp),
+            color = Color(0xFF8BAE66),
+            textAlign = TextAlign.Center
+        )
+
+    }
+    Row(
+        modifier.padding(8.dp)
+
+    ){
+        Icon(
+            imageVector = Icons.Default.Share, // Access the default menu icon
+            contentDescription = "Menu Button", // For accessibility
+            modifier = Modifier.size(24.dp), // Adjust size
+            tint = Color(0xFFEBD5AB)        )
+        Text(
+            text = "@theflutterguy",
+            modifier = modifier.padding(horizontal = 16.dp),
+            color = Color(0xFF8BAE66),
+            textAlign = TextAlign.Center
+        )
+
+    }
+    Row(
+        modifier.padding(8.dp)
+
+    ){
+        Icon(
+            imageVector = Icons.Default.Email, // Access the default menu icon
+            contentDescription = "Menu Button", // For accessibility
+            modifier = Modifier.size(24.dp), // Adjust size
+            tint = Color(0xFFEBD5AB)        )
+        Text(
+            text = "the.flutter.guy1000@gmail.com",
+            modifier = modifier.padding(horizontal = 16.dp),
+            color = Color(0xFF8BAE66),
+            textAlign = TextAlign.Center
+        )
+
+    }
+}
+}
+
 
 
 @Preview(showBackground = true)
 @Composable
 fun BirthdayCardPreview() {
     BirthdayCardTheme {
-        ComposeQuadrant()
+        BusinessCard()
+//        ComposeQuadrant()
 //TaskManager(title = "All tasks completed", subtitle = "Nice work!")
 //        ComposeArticle(title = "Jetpack Compose tutorial", para1 ="Jetpack Compose is a modern toolkit for building native Android UI. Compose simplifies and accelerates UI development on Android with less code, powerful tools, and intuitive Kotlin APIs." , para2 ="In this tutorial, you build a simple UI component with declarative functions. You call Compose functions to say what elements you want and the Compose compiler does the rest. Compose is built around Composable functions. These functions let you define your app\\'s UI programmatically because they let you describe how it should look and provide data dependencies, rather than focus on the process of the UI\\'s construction, such as initializing an element and then attaching it to a parent. To create a Composable function, you add the @Composable annotation to the function name.")
 //        GreetingImage(stringResource(R.string.happy_birthday_sam),"from Bae")
